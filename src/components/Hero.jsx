@@ -17,12 +17,12 @@ export default function Hero({ onFilterChange }) {
         <img
           src="https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1920&auto=format&fit=crop&q=80"
           alt="Hero"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover animate-kenburns"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
       </div>
       <div className="relative h-full flex items-center px-6 md:px-16 lg:px-24">
-        <div className="max-w-2xl text-white animate-fade-in">
+        <div className="max-w-2xl text-white animate-slide-up">
           <p className="text-brand-300 text-sm md:text-base tracking-widest mb-4">SUMMER COLLECTION 2026</p>
           <h1 className="hero-title text-5xl md:text-6xl lg:text-8xl font-serif font-bold leading-tight mb-6">
             Effortless<br />Elegance

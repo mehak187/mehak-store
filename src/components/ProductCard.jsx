@@ -32,7 +32,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView, onWishl
       className="product-card group cursor-pointer"
       onClick={() => onQuickView(product)}
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
+      <div className="product-media relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
         {product.svgType ? (
           <div className="w-full h-full product-img transition-transform duration-700">
             <ProductSVGRenderer
@@ -84,7 +84,9 @@ export default function ProductCard({ product, onAddToCart, onQuickView, onWishl
       </div>
       <div>
         <p className="text-xs text-ink-500 uppercase tracking-wider">{product.category}</p>
-        <h3 className="font-medium mt-1 hover:text-brand-500 transition">{product.name}</h3>
+        <h3 className="font-medium mt-1">
+          <span className="link-underline inline">{product.name}</span>
+        </h3>
         {product.rating && (
           <div className="flex items-center gap-2 mt-1">
             <StarRating rating={product.rating} />

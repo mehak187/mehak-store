@@ -22,6 +22,7 @@ import Footer from './components/Footer';
 import WhatsappButton from './components/WhatsappButton';
 import QuickView from './components/QuickView';
 import ArticleModal from './components/ArticleModal';
+import Reveal from './components/Reveal';
 import { cartInitialItems } from './data/products';
 
 export default function App() {
@@ -129,27 +130,31 @@ export default function App() {
 
       <main>
         <Hero onFilterChange={setActiveFilter} />
-        <BrandFeatures />
-        <Categories onFilterChange={setActiveFilter} />
-        <FlashSale onFilterChange={setActiveFilter} />
-        <NewArrivals
-          onAddToCart={handleAddToCart}
-          onQuickView={setQuickViewProduct}
-          onWishlist={handleWishlist}
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-        />
-        <CollectionShowcase onFilterChange={setActiveFilter} />
-        <BestSellers
-          onQuickView={setQuickViewProduct}
-          onAddToCart={handleAddToCart}
-        />
-        <PromoBanner />
-        <Testimonials />
-        <InstagramFeed />
-        <BrandStory />
-        <BlogPreview onArticleOpen={setActiveArticle} />
-        <Newsletter />
+        <Reveal><BrandFeatures /></Reveal>
+        <Reveal><Categories onFilterChange={setActiveFilter} /></Reveal>
+        <Reveal><FlashSale onFilterChange={setActiveFilter} /></Reveal>
+        <Reveal>
+          <NewArrivals
+            onAddToCart={handleAddToCart}
+            onQuickView={setQuickViewProduct}
+            onWishlist={handleWishlist}
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+          />
+        </Reveal>
+        <Reveal><CollectionShowcase onFilterChange={setActiveFilter} /></Reveal>
+        <Reveal>
+          <BestSellers
+            onQuickView={setQuickViewProduct}
+            onAddToCart={handleAddToCart}
+          />
+        </Reveal>
+        <Reveal><PromoBanner /></Reveal>
+        <Reveal><Testimonials /></Reveal>
+        <Reveal><InstagramFeed /></Reveal>
+        <Reveal><BrandStory /></Reveal>
+        <Reveal><BlogPreview onArticleOpen={setActiveArticle} /></Reveal>
+        <Reveal><Newsletter /></Reveal>
       </main>
 
       <Footer onFilterChange={setActiveFilter} onNotify={showNotification} />

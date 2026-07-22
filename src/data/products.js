@@ -25,7 +25,7 @@ export const newArrivals = [
     name: 'Premium Leather Tote',
     category: 'Handbags',
     price: 249,
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=500',
+    image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=500',
     badge: { text: 'HOT', type: 'hot' },
     rating: 5,
     reviews: 89,
@@ -315,7 +315,7 @@ export const cartInitialItems = [
     variant: 'Color: Cognac',
     price: 249,
     qty: 1,
-    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=200',
+    image: 'https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=200',
   },
   {
     id: 3,

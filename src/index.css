@@ -67,4 +67,81 @@
   @media (max-width: 768px) {
     .hero-title { font-size: 3rem !important; line-height: 1.1; }
   }
+
+  /* ===== Scroll reveal ===== */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== Moving / cinematic bits ===== */
+  .animate-float { animation: float 4s ease-in-out infinite; }
+  .animate-float-soft { animation: floatSoft 5s ease-in-out infinite; }
+  .animate-kenburns { animation: kenburns 20s ease-out forwards; }
+
+  /* Gradient headings gently shimmer */
+  .gradient-text {
+    background-size: 200% auto;
+    animation: gradientPan 5s ease-in-out infinite;
+  }
+
+  /* Product cards: lift the whole card, but shadow only on the (rounded) image */
+  .product-card { transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+  .product-card:hover { transform: translateY(-10px); }
+
+  .product-media { transition: box-shadow 0.45s ease; }
+  .product-card:hover .product-media {
+    box-shadow: 0 28px 55px -18px rgba(26, 25, 22, 0.45);
+  }
+  .product-card:hover .product-img { transform: scale(1.08); }
+
+  /* Glossy light sweep across the image on hover */
+  .product-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    pointer-events: none;
+    background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,0.45) 48%, rgba(255,255,255,0.45) 52%, transparent 70%);
+    transform: translateX(-130%);
+    transition: transform 0.85s ease;
+  }
+  .product-card:hover .product-media::after { transform: translateX(130%); }
+
+  /* Animated underline that draws itself under the product name on hover */
+  .link-underline {
+    background-image: linear-gradient(#B87333, #B87333);
+    background-size: 0% 2px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.4s ease, color 0.3s ease;
+    padding-bottom: 2px;
+  }
+  .product-card:hover .link-underline { background-size: 100% 2px; color: #B87333; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+    .animate-float, .animate-float-soft, .animate-kenburns, .gradient-text { animation: none !important; }
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes floatSoft {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+@keyframes kenburns {
+  0% { transform: scale(1) translate(0, 0); }
+  100% { transform: scale(1.12) translate(-1.5%, -1.5%); }
+}
+@keyframes gradientPan {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
 }
