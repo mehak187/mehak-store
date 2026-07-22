@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #FAFAF7;
+    color: #1A1916;
+  }
+}
+
+@layer utilities {
+  .font-serif { font-family: 'Playfair Display', serif; }
+
+  ::-webkit-scrollbar { width: 8px; height: 8px; }
+  ::-webkit-scrollbar-track { background: #F7F7F5; }
+  ::-webkit-scrollbar-thumb { background: #B87333; border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: #8B5A2B; }
+
+  .product-card:hover .product-img { transform: scale(1.05); }
+  .product-card:hover .quick-actions { opacity: 1; transform: translateY(0); }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #1A1916 0%, #38372F 100%);
+    transition: all 0.3s;
+  }
+  .btn-primary:hover {
+    background: linear-gradient(135deg, #B87333 0%, #8B5A2B 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(184, 115, 51, 0.3);
+  }
+
+  .btn-secondary {
+    border: 2px solid #1A1916;
+    transition: all 0.3s;
+  }
+  .btn-secondary:hover {
+    background: #1A1916;
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+  .gradient-text {
+    background: linear-gradient(135deg, #B87333 0%, #8B5A2B 50%, #5C3A1D 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .badge-new { background: linear-gradient(135deg, #10B981 0%, #059669 100%); }
+  .badge-sale { background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%); }
+  .badge-hot { background: linear-gradient(135deg, #F97316 0%, #EA580C 100%); }
+
+  input:focus, textarea:focus, select:focus { outline: none; }
+
+  @media (max-width: 768px) {
+    .hero-title { font-size: 3rem !important; line-height: 1.1; }
+  }
+}
