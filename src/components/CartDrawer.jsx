@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Icon, PaymentIcon } from './Icons';
 import { ProductSVGRenderer } from './ProductSVG';
 
-export default function CartDrawer({ open, onClose, items, onQtyChange, onRemove }) {
+export default function CartDrawer({ open, onClose, items, onQtyChange, onRemove, onCheckout }) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -124,7 +124,10 @@ export default function CartDrawer({ open, onClose, items, onQtyChange, onRemove
                 </div>
               </div>
 
-              <button className="w-full btn-primary text-white py-4 rounded-lg font-medium">
+              <button
+                onClick={onCheckout}
+                className="w-full btn-primary text-white py-4 rounded-lg font-medium"
+              >
                 CHECKOUT NOW
               </button>
               <button onClick={onClose} className="w-full btn-secondary py-4 rounded-lg font-medium">

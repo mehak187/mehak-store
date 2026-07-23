@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { bestSellers } from '../data/products';
 import { ProductSVGRenderer } from './ProductSVG';
 
-export default function BestSellers({ onQuickView, onAddToCart }) {
+export default function BestSellers({ onQuickView, onAddToCart, onOpenProduct }) {
   return (
     <section id="best-sellers" className="py-16 md:py-24 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6">
@@ -17,6 +17,7 @@ export default function BestSellers({ onQuickView, onAddToCart }) {
               product={product}
               onQuickView={onQuickView}
               onAddToCart={onAddToCart}
+              onOpenProduct={onOpenProduct}
             />
           ))}
         </div>
@@ -25,16 +26,16 @@ export default function BestSellers({ onQuickView, onAddToCart }) {
   );
 }
 
-function BestSellerCard({ product, onQuickView, onAddToCart }) {
+function BestSellerCard({ product, onQuickView, onAddToCart, onOpenProduct }) {
   const [selectedIdx, setSelectedIdx] = useState(0);
   const selectedColor = product.colors?.[selectedIdx];
 
   return (
     <div
-      onClick={() => onQuickView(product)}
+      onClick={() => (onOpenProduct ? onOpenProduct(product) : onQuickView(product))}
       className="product-card group cursor-pointer"
     >
-      <div className="relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
+      <div className="product-media relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
         {product.svgType ? (
           <div className="w-full h-full product-img transition-transform duration-700">
             <ProductSVGRenderer

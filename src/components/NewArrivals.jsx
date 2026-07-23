@@ -12,7 +12,7 @@ const filterMap = {
   Shoes: ['Shoes'],
 };
 
-export default function NewArrivals({ onAddToCart, onQuickView, onWishlist, activeFilter, onFilterChange }) {
+export default function NewArrivals({ onAddToCart, onQuickView, onWishlist, activeFilter, onFilterChange, onOpenProduct }) {
   const [visibleCount, setVisibleCount] = useState(8);
 
   const filtered = useMemo(() => {
@@ -78,6 +78,7 @@ export default function NewArrivals({ onAddToCart, onQuickView, onWishlist, acti
                 onAddToCart={onAddToCart}
                 onQuickView={onQuickView}
                 onWishlist={onWishlist}
+                onOpenProduct={onOpenProduct}
               />
             ))}
           </div>

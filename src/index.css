@@ -81,7 +81,7 @@
   /* ===== Moving / cinematic bits ===== */
   .animate-float { animation: float 4s ease-in-out infinite; }
   .animate-float-soft { animation: floatSoft 5s ease-in-out infinite; }
-  .animate-kenburns { animation: kenburns 20s ease-out forwards; }
+  .animate-kenburns { animation: kenburns 18s ease-in-out infinite alternate; }
 
   /* Gradient headings gently shimmer */
   .gradient-text {
@@ -123,10 +123,46 @@
   }
   .product-card:hover .link-underline { background-size: 100% 2px; color: #B87333; }
 
+  /* Hero headline: each letter materializes out of blur */
+  .animate-letter {
+    display: inline-block;
+    opacity: 0;
+    animation: letterRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
     .animate-float, .animate-float-soft, .animate-kenburns, .gradient-text { animation: none !important; }
+    .animate-letter { opacity: 1 !important; animation: none !important; }
   }
+}
+
+@keyframes letterRise {
+  0% { opacity: 0; transform: translateY(0.7em) rotate(8deg); filter: blur(10px); }
+  60% { opacity: 1; }
+  100% { opacity: 1; transform: translateY(0) rotate(0); filter: blur(0); }
+}
+
+/* Checkout success: badge pop + checkmark draw */
+.animate-pop { animation: pop 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards; }
+@keyframes pop {
+  0% { transform: scale(0); opacity: 0; }
+  60% { transform: scale(1.15); }
+  100% { transform: scale(1); opacity: 1; }
+}
+.check-path { stroke-dasharray: 30; stroke-dashoffset: 30; animation: drawCheck 0.5s ease 0.35s forwards; }
+@keyframes drawCheck { to { stroke-dashoffset: 0; } }
+
+/* Top scroll-progress bar (scrollytelling) */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  z-index: 100;
+  background: linear-gradient(90deg, #B87333, #8B5A2B);
+  transform-origin: left;
+  will-change: width;
 }
 
 @keyframes float {

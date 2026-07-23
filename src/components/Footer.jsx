@@ -1,18 +1,18 @@
 import { SocialIcon, PaymentIcon } from './Icons';
-import { scrollToSection, scrollToTop } from '../utils/scroll';
+import { scrollToTop } from '../utils/scroll';
 
-export default function Footer({ onFilterChange, onNotify }) {
+export default function Footer({ onShop, onNavigate, onNotify }) {
   const shopLinks = [
-    { label: 'New Arrivals', action: () => { onFilterChange('All'); scrollToSection('new-arrivals'); } },
-    { label: 'Best Sellers', action: () => scrollToSection('best-sellers') },
-    { label: 'Women', action: () => { onFilterChange('Women'); scrollToSection('new-arrivals'); } },
-    { label: 'Men', action: () => { onFilterChange('Men'); scrollToSection('new-arrivals'); } },
-    { label: 'Sale', action: () => { onFilterChange('All'); scrollToSection('flash-sale'); } },
+    { label: 'New Arrivals', action: () => onShop('All') },
+    { label: 'Best Sellers', action: () => onShop('All') },
+    { label: 'Shop All', action: () => onShop('All') },
+    { label: 'Jewelry', action: () => onShop('Jewelry') },
+    { label: 'Sale', action: () => onShop('All') },
     { label: 'Gift Cards', action: () => onNotify('Gift Cards coming soon!') },
   ];
 
   const helpLinks = [
-    { label: 'Contact Us', action: () => onNotify('Email: hello@luxe.com · Phone: +1 555-123-4567') },
+    { label: 'Contact Us', action: () => onNavigate('contact') },
     { label: 'Shipping Info', action: () => onNotify('Free shipping on orders over $50 worldwide!') },
     { label: 'Returns & Exchanges', action: () => onNotify('30-day easy returns on all items.') },
     { label: 'Size Guide', action: () => onNotify('Size guide coming soon!') },
@@ -21,8 +21,8 @@ export default function Footer({ onFilterChange, onNotify }) {
   ];
 
   const companyLinks = [
-    { label: 'About Us', action: () => scrollToSection('about') },
-    { label: 'Our Story', action: () => scrollToSection('about') },
+    { label: 'About Us', action: () => onNavigate('about') },
+    { label: 'Our Story', action: () => onNavigate('about') },
     { label: 'Sustainability', action: () => onNotify('100% ethical production. Learn more soon!') },
     { label: 'Careers', action: () => onNotify('Career opportunities coming soon!') },
     { label: 'Press', action: () => onNotify('Press inquiries: press@luxe.com') },
@@ -32,9 +32,18 @@ export default function Footer({ onFilterChange, onNotify }) {
   return (
     <footer className="bg-ink-900 text-white pt-16 pb-8">
       <div className="max-w-7xl mx-auto px-6">
+        <div className="flex justify-center mb-12">
+          <button
+            onClick={scrollToTop}
+            className="group flex items-center gap-2 border border-ink-700 hover:border-brand-500 hover:bg-brand-500 px-6 py-3 rounded-full text-sm uppercase tracking-widest transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+          >
+            <span>Back to Top</span>
+            <span className="text-lg leading-none group-hover:-translate-y-0.5 transition-transform">↑</span>
+          </button>
+        </div>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-8 mb-12">
           <div className="col-span-2">
-            <button onClick={scrollToTop} className="text-3xl font-serif font-bold mb-4 block">
+            <button onClick={() => onNavigate('home')} className="text-3xl font-serif font-bold mb-4 block">
               LUXE<span className="text-brand-500">.</span>
             </button>
             <p className="text-ink-300 text-sm mb-4 leading-relaxed">

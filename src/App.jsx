@@ -23,10 +23,18 @@ import WhatsappButton from './components/WhatsappButton';
 import QuickView from './components/QuickView';
 import ArticleModal from './components/ArticleModal';
 import Reveal from './components/Reveal';
+import MarqueeRibbon from './components/MarqueeRibbon';
+import ScrollProgress from './components/ScrollProgress';
+import Checkout from './components/Checkout';
+import ShopPage from './components/ShopPage';
+import AboutPage from './components/AboutPage';
+import ContactPage from './components/ContactPage';
+import ProductDetailPage from './components/ProductDetailPage';
 import { cartInitialItems } from './data/products';
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
@@ -35,6 +43,22 @@ export default function App() {
   const [wishlistCount, setWishlistCount] = useState(5);
   const [activeFilter, setActiveFilter] = useState('All');
   const [notification, setNotification] = useState({ show: false, message: '' });
+  const [page, setPage] = useState('home');
+  const [shopCategory, setShopCategory] = useState('All');
+  const [detailProduct, setDetailProduct] = useState(null);
+
+  const navigate = (name) => {
+    setPage(name);
+    window.scrollTo(0, 0);
+  };
+  const openShop = (category = 'All') => {
+    setShopCategory(category);
+    navigate('shop');
+  };
+  const openProduct = (product) => {
+    setDetailProduct(product);
+    navigate('product');
+  };
 
   const showNotification = (message) => {
     setNotification({ show: true, message });
@@ -86,8 +110,20 @@ export default function App() {
 
   const cartCount = cartItems.reduce((sum, item) => sum + item.qty, 0);
 
+  const handleCheckout = () => {
+    if (cartItems.length === 0) return;
+    setCartOpen(false);
+    setCheckoutOpen(true);
+  };
+
+  const handlePaid = () => {
+    setCartItems([]);
+    showNotification('Payment successful — thank you for your order!');
+  };
+
   return (
     <div className="min-h-screen">
+      <ScrollProgress />
       <AnnouncementBar />
       <Header
         cartCount={cartCount}
@@ -95,8 +131,10 @@ export default function App() {
         onCartOpen={() => setCartOpen(true)}
         onSearchOpen={() => setSearchOpen(true)}
         onMenuOpen={() => setMobileMenuOpen(true)}
-        onFilterChange={setActiveFilter}
+        onNavigate={navigate}
+        onShop={openShop}
         onNotify={showNotification}
+        page={page}
       />
 
       <MobileMenu
@@ -116,6 +154,13 @@ export default function App() {
         items={cartItems}
         onQtyChange={handleQtyChange}
         onRemove={handleRemove}
+        onCheckout={handleCheckout}
+      />
+      <Checkout
+        open={checkoutOpen}
+        onClose={() => setCheckoutOpen(false)}
+        items={cartItems}
+        onPaid={handlePaid}
       />
       <QuickView
         product={quickViewProduct}
@@ -128,36 +173,69 @@ export default function App() {
       />
       <Notification show={notification.show} message={notification.message} />
 
-      <main>
-        <Hero onFilterChange={setActiveFilter} />
-        <Reveal><BrandFeatures /></Reveal>
-        <Reveal><Categories onFilterChange={setActiveFilter} /></Reveal>
-        <Reveal><FlashSale onFilterChange={setActiveFilter} /></Reveal>
-        <Reveal>
-          <NewArrivals
+      {page === 'home' && (
+        <main>
+          <Hero onFilterChange={setActiveFilter} />
+          <MarqueeRibbon />
+          <Reveal><BrandFeatures /></Reveal>
+          <Reveal><Categories onFilterChange={setActiveFilter} /></Reveal>
+          <Reveal><FlashSale onFilterChange={setActiveFilter} /></Reveal>
+          <Reveal>
+            <NewArrivals
+              onAddToCart={handleAddToCart}
+              onQuickView={setQuickViewProduct}
+              onWishlist={handleWishlist}
+              activeFilter={activeFilter}
+              onFilterChange={setActiveFilter}
+              onOpenProduct={openProduct}
+            />
+          </Reveal>
+          <Reveal><CollectionShowcase onFilterChange={setActiveFilter} /></Reveal>
+          <Reveal>
+            <BestSellers
+              onQuickView={setQuickViewProduct}
+              onAddToCart={handleAddToCart}
+              onOpenProduct={openProduct}
+            />
+          </Reveal>
+          <Reveal><PromoBanner /></Reveal>
+          <Reveal><Testimonials /></Reveal>
+          <Reveal><InstagramFeed /></Reveal>
+          <Reveal><BrandStory /></Reveal>
+          <Reveal><BlogPreview onArticleOpen={setActiveArticle} /></Reveal>
+          <Reveal><Newsletter /></Reveal>
+        </main>
+      )}
+
+      {page === 'shop' && (
+        <main>
+          <ShopPage
+            key={shopCategory}
             onAddToCart={handleAddToCart}
             onQuickView={setQuickViewProduct}
             onWishlist={handleWishlist}
-            activeFilter={activeFilter}
-            onFilterChange={setActiveFilter}
+            onOpenProduct={openProduct}
+            initialCategory={shopCategory}
           />
-        </Reveal>
-        <Reveal><CollectionShowcase onFilterChange={setActiveFilter} /></Reveal>
-        <Reveal>
-          <BestSellers
-            onQuickView={setQuickViewProduct}
-            onAddToCart={handleAddToCart}
-          />
-        </Reveal>
-        <Reveal><PromoBanner /></Reveal>
-        <Reveal><Testimonials /></Reveal>
-        <Reveal><InstagramFeed /></Reveal>
-        <Reveal><BrandStory /></Reveal>
-        <Reveal><BlogPreview onArticleOpen={setActiveArticle} /></Reveal>
-        <Reveal><Newsletter /></Reveal>
-      </main>
+        </main>
+      )}
 
-      <Footer onFilterChange={setActiveFilter} onNotify={showNotification} />
+      {page === 'about' && <main><AboutPage /></main>}
+
+      {page === 'contact' && <main><ContactPage onNotify={showNotification} /></main>}
+
+      {page === 'product' && (
+        <main>
+          <ProductDetailPage
+            product={detailProduct}
+            onAddToCart={handleAddToCart}
+            onWishlist={handleWishlist}
+            onBack={() => navigate('shop')}
+          />
+        </main>
+      )}
+
+      <Footer onShop={openShop} onNavigate={navigate} onNotify={showNotification} />
       <WhatsappButton />
     </div>
   );

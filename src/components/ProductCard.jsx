@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { Icon, StarRating } from './Icons';
 import { ProductSVGRenderer } from './ProductSVG';
 
-export default function ProductCard({ product, onAddToCart, onQuickView, onWishlist }) {
+export default function ProductCard({ product, onAddToCart, onQuickView, onWishlist, onOpenProduct }) {
+  const openDetail = () => (onOpenProduct ? onOpenProduct(product) : onQuickView(product));
   const [wishlisted, setWishlisted] = useState(false);
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
 
@@ -30,7 +31,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView, onWishl
   return (
     <div
       className="product-card group cursor-pointer"
-      onClick={() => onQuickView(product)}
+      onClick={openDetail}
     >
       <div className="product-media relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
         {product.svgType ? (

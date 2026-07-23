@@ -1,11 +1,9 @@
 import { Icon } from './Icons';
 import { scrollToSection, scrollToTop } from '../utils/scroll';
 
-export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchOpen, onMenuOpen, onFilterChange, onNotify }) {
-  const handleNav = (filter, sectionId = 'new-arrivals') => {
-    if (filter) onFilterChange(filter);
-    scrollToSection(sectionId);
-  };
+export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchOpen, onMenuOpen, onNotify, onNavigate, onShop, page }) {
+  const goShop = (category = 'All') => onShop(category);
+  const active = (p) => (page === p ? 'text-brand-500' : '');
 
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-ink-100">
@@ -59,27 +57,33 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <Icon name="menu" className="w-6 h-6" />
         </button>
 
-        <button onClick={scrollToTop} className="text-3xl md:text-4xl font-serif font-bold tracking-tight">
+        <button onClick={() => onNavigate('home')} className="text-3xl md:text-4xl font-serif font-bold tracking-tight">
           LUXE<span className="text-brand-500">.</span>
         </button>
 
-        <nav className="hidden lg:flex items-center gap-8">
-          <button onClick={() => handleNav('All')} className="text-sm font-medium hover:text-brand-500 transition relative group">
-            NEW ARRIVALS
-            <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-500 group-hover:w-full transition-all" />
+        <nav className="hidden lg:flex items-center gap-7">
+          <button onClick={() => goShop('All')} className={`text-sm font-medium hover:text-brand-500 transition relative group ${active('shop')}`}>
+            SHOP
+            <span className={`absolute -bottom-1 left-0 h-0.5 bg-brand-500 transition-all ${page === 'shop' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
           </button>
           <div className="relative group">
-            <button onClick={() => handleNav('Women')} className="text-sm font-medium hover:text-brand-500 transition flex items-center gap-1">
+            <button onClick={() => goShop('All')} className="text-sm font-medium hover:text-brand-500 transition flex items-center gap-1">
               WOMEN
               <Icon name="chevronDown" className="w-3 h-3" />
             </button>
-            <MegaMenu onFilterChange={onFilterChange} onNav={handleNav} />
+            <MegaMenu onNav={goShop} />
           </div>
-          <button onClick={() => handleNav('Men')} className="text-sm font-medium hover:text-brand-500 transition">MEN</button>
-          <button onClick={() => handleNav('Jewelry')} className="text-sm font-medium hover:text-brand-500 transition">JEWELRY</button>
-          <button onClick={() => handleNav('All')} className="text-sm font-medium hover:text-brand-500 transition text-red-500">SALE</button>
-          <button onClick={() => scrollToSection('collections')} className="text-sm font-medium hover:text-brand-500 transition">LOOKBOOK</button>
-          <button onClick={() => scrollToSection('journal')} className="text-sm font-medium hover:text-brand-500 transition">JOURNAL</button>
+          <button onClick={() => goShop('All')} className="text-sm font-medium hover:text-brand-500 transition">MEN</button>
+          <button onClick={() => goShop('Jewelry')} className="text-sm font-medium hover:text-brand-500 transition">JEWELRY</button>
+          <button onClick={() => goShop('All')} className="text-sm font-medium hover:text-brand-500 transition text-red-500">SALE</button>
+          <button onClick={() => onNavigate('about')} className={`text-sm font-medium hover:text-brand-500 transition relative group ${active('about')}`}>
+            ABOUT
+            <span className={`absolute -bottom-1 left-0 h-0.5 bg-brand-500 transition-all ${page === 'about' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+          </button>
+          <button onClick={() => onNavigate('contact')} className={`text-sm font-medium hover:text-brand-500 transition relative group ${active('contact')}`}>
+            CONTACT
+            <span className={`absolute -bottom-1 left-0 h-0.5 bg-brand-500 transition-all ${page === 'contact' ? 'w-full' : 'w-0 group-hover:w-full'}`} />
+          </button>
         </nav>
 
         <div className="flex items-center gap-4 md:gap-6">
@@ -111,7 +115,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
   );
 }
 
-function MegaMenu({ onFilterChange, onNav }) {
+function MegaMenu({ onNav }) {
   return (
     <div className="absolute top-full left-1/2 -translate-x-1/2 w-screen max-w-4xl bg-white shadow-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 mt-4">
       <div className="grid grid-cols-4 gap-8 p-8">
