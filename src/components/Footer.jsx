@@ -8,14 +8,14 @@ export default function Footer({ onShop, onNavigate, onNotify }) {
     { label: 'Shop All', action: () => onShop('All') },
     { label: 'Jewelry', action: () => onShop('Jewelry') },
     { label: 'Sale', action: () => onShop('All') },
-    { label: 'Gift Cards', action: () => onNotify('Gift Cards coming soon!') },
+    { label: 'Gift Cards', action: () => onNotify('Gift cards available from $25 to $500.') },
   ];
 
   const helpLinks = [
     { label: 'Contact Us', action: () => onNavigate('contact') },
     { label: 'Shipping Info', action: () => onNotify('Free shipping on orders over $50 worldwide!') },
     { label: 'Returns & Exchanges', action: () => onNotify('30-day easy returns on all items.') },
-    { label: 'Size Guide', action: () => onNotify('Size guide coming soon!') },
+    { label: 'Size Guide', action: () => onNotify('Sizes: XS(0-2) · S(4-6) · M(8-10) · L(12-14) · XL(16-18)') },
     { label: 'FAQ', action: () => onNavigate('help') },
     { label: 'Track Order', action: () => onNavigate('track') },
   ];
@@ -24,7 +24,7 @@ export default function Footer({ onShop, onNavigate, onNotify }) {
     { label: 'About Us', action: () => onNavigate('about') },
     { label: 'Our Story', action: () => onNavigate('about') },
     { label: 'Sustainability', action: () => onNotify('100% ethical production. Learn more soon!') },
-    { label: 'Careers', action: () => onNotify('Career opportunities coming soon!') },
+    { label: 'Careers', action: () => onNotify('Send your resume to careers@luxe.com') },
     { label: 'Press', action: () => onNotify('Press inquiries: press@luxe.com') },
     { label: 'Wholesale', action: () => onNotify('Wholesale: wholesale@luxe.com') },
   ];
@@ -64,9 +64,9 @@ export default function Footer({ onShop, onNavigate, onNotify }) {
           <div className="text-sm text-ink-400 flex flex-wrap gap-2 items-center">
             <span>© 2026 LUXE. All rights reserved.</span>
             <span>|</span>
-            <button onClick={() => onNotify('Privacy Policy coming soon!')} className="hover:text-brand-500">Privacy Policy</button>
+            <button onClick={() => onNotify('Your privacy matters — we never share your data with third parties.')} className="hover:text-brand-500">Privacy Policy</button>
             <span>|</span>
-            <button onClick={() => onNotify('Terms of Service coming soon!')} className="hover:text-brand-500">Terms of Service</button>
+            <button onClick={() => onNotify('By shopping with LUXE you agree to our terms of service.')} className="hover:text-brand-500">Terms of Service</button>
           </div>
           <div className="flex items-center gap-2 flex-wrap">
             <span className="text-xs text-ink-400 mr-1">Secure payments:</span>

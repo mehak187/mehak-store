@@ -12,7 +12,7 @@ const links = [
   { label: 'Journal', filter: null, section: 'journal' },
 ];
 
-export default function MobileMenu({ open, onClose, onFilterChange, onNotify }) {
+export default function MobileMenu({ open, onClose, onFilterChange, onNotify, onNavigate }) {
   useEffect(() => {
     if (open) {
       document.body.style.overflow = 'hidden';
@@ -54,13 +54,13 @@ export default function MobileMenu({ open, onClose, onFilterChange, onNotify }) 
           </nav>
           <div className="mt-8 space-y-3">
             <button
-              onClick={() => { onNotify('My Account coming soon!'); onClose(); }}
+              onClick={() => { onNavigate('account'); onClose(); }}
               className="flex items-center gap-3 py-2 w-full text-left hover:text-brand-500"
             >
               <Icon name="user" /> My Account
             </button>
             <button
-              onClick={() => { onNotify('Order tracking coming soon!'); onClose(); }}
+              onClick={() => { onNavigate('track'); onClose(); }}
               className="flex items-center gap-3 py-2 w-full text-left hover:text-brand-500"
             >
               <Icon name="truck" /> Track Order

@@ -1,4 +1,4 @@
-export default function BrandStory() {
+export default function BrandStory({ onNavigate }) {
   return (
     <section id="about" className="py-16 md:py-24 bg-white scroll-mt-24">
       <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
@@ -21,7 +21,7 @@ export default function BrandStory() {
             <Stat number="100%" label="Ethical Production" />
           </div>
           <button
-            onClick={() => alert('Full story page coming soon!')}
+            onClick={() => onNavigate('about')}
             className="btn-secondary px-6 py-3 rounded-full font-medium"
           >
             READ OUR STORY →

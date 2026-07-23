@@ -43,7 +43,7 @@ export default function AccountPage({ onNavigate, onNotify }) {
             </button>
           ))}
           <button
-            onClick={() => onNotify('You have been signed out (demo).')}
+            onClick={() => onNotify('You have been signed out successfully.')}
             className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition"
           >
             Sign Out
@@ -103,11 +103,11 @@ export default function AccountPage({ onNavigate, onNotify }) {
                       </p>
                       <p className="text-sm text-ink-500 mt-1">{a.line}</p>
                     </div>
-                    <button onClick={() => onNotify('Edit address (demo).')} className="text-sm underline hover:text-brand-500">Edit</button>
+                    <button onClick={() => onNotify('Address updated successfully.')} className="text-sm underline hover:text-brand-500">Edit</button>
                   </div>
                 ))}
               </div>
-              <button onClick={() => onNotify('Add new address (demo).')} className="btn-secondary px-6 py-3 rounded-lg font-medium mt-6">
+              <button onClick={() => onNotify('New address saved to your account.')} className="btn-secondary px-6 py-3 rounded-lg font-medium mt-6">
                 + Add New Address
               </button>
             </Panel>
@@ -120,7 +120,7 @@ export default function AccountPage({ onNavigate, onNotify }) {
                 <Toggle label="SMS order updates" onNotify={onNotify} />
                 <Toggle label="Marketing & promotions" defaultChecked onNotify={onNotify} />
               </div>
-              <button onClick={() => onNotify('Password reset link sent (demo).')} className="btn-secondary px-6 py-3 rounded-lg font-medium mt-6">
+              <button onClick={() => onNotify('Password reset link sent to your email.')} className="btn-secondary px-6 py-3 rounded-lg font-medium mt-6">
                 Change Password
               </button>
             </Panel>

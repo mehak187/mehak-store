@@ -21,7 +21,7 @@ import Newsletter from './components/Newsletter';
 import Footer from './components/Footer';
 import WhatsappButton from './components/WhatsappButton';
 import QuickView from './components/QuickView';
-import ArticleModal from './components/ArticleModal';
+import ArticlePage from './components/ArticlePage';
 import Reveal from './components/Reveal';
 import MarqueeRibbon from './components/MarqueeRibbon';
 import ScrollProgress from './components/ScrollProgress';
@@ -61,6 +61,10 @@ export default function App() {
   const openProduct = (product) => {
     setDetailProduct(product);
     navigate('product');
+  };
+  const openArticle = (article) => {
+    setActiveArticle(article);
+    navigate('article');
   };
 
   const showNotification = (message) => {
@@ -145,6 +149,7 @@ export default function App() {
         onClose={() => setMobileMenuOpen(false)}
         onFilterChange={setActiveFilter}
         onNotify={showNotification}
+        onNavigate={navigate}
       />
       <SearchOverlay
         open={searchOpen}
@@ -169,10 +174,6 @@ export default function App() {
         product={quickViewProduct}
         onClose={() => setQuickViewProduct(null)}
         onAddToCart={handleAddToCart}
-      />
-      <ArticleModal
-        article={activeArticle}
-        onClose={() => setActiveArticle(null)}
       />
       <Notification show={notification.show} message={notification.message} />
 
@@ -204,8 +205,8 @@ export default function App() {
           <Reveal><PromoBanner /></Reveal>
           <Reveal><Testimonials /></Reveal>
           <Reveal><InstagramFeed /></Reveal>
-          <Reveal><BrandStory /></Reveal>
-          <Reveal><BlogPreview onArticleOpen={setActiveArticle} /></Reveal>
+          <Reveal><BrandStory onNavigate={navigate} /></Reveal>
+          <Reveal><BlogPreview onArticleOpen={openArticle} /></Reveal>
           <Reveal><Newsletter /></Reveal>
         </main>
       )}
@@ -232,6 +233,8 @@ export default function App() {
       {page === 'help' && <main><HelpPage onNavigate={navigate} onNotify={showNotification} /></main>}
 
       {page === 'account' && <main><AccountPage onNavigate={navigate} onNotify={showNotification} /></main>}
+
+      {page === 'article' && <main><ArticlePage article={activeArticle} onBack={() => navigate('home')} onNotify={showNotification} /></main>}
 
       {page === 'product' && (
         <main>
