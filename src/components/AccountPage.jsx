@@ -13,17 +13,18 @@ const addresses = [
 
 const tabs = ['Profile', 'Orders', 'Addresses', 'Settings'];
 
-export default function AccountPage({ onNavigate, onNotify }) {
+export default function AccountPage({ onNavigate, onNotify, onSignOut, userName = 'Mehak' }) {
   const [tab, setTab] = useState('Profile');
+  const initial = userName.trim().charAt(0).toUpperCase() || 'M';
 
   return (
     <div className="max-w-6xl mx-auto px-6 py-14 min-h-screen">
       <div className="flex items-center gap-4 mb-10">
         <div className="w-16 h-16 rounded-full bg-brand-500 text-white flex items-center justify-center text-2xl font-serif font-bold">
-          M
+          {initial}
         </div>
         <div>
-          <h1 className="text-3xl font-serif font-bold">Hello, Mehak</h1>
+          <h1 className="text-3xl font-serif font-bold">Hello, {userName}</h1>
           <p className="text-ink-500 text-sm">mehak@example.com · Member since 2024</p>
         </div>
       </div>
@@ -43,7 +44,7 @@ export default function AccountPage({ onNavigate, onNotify }) {
             </button>
           ))}
           <button
-            onClick={() => onNotify('You have been signed out successfully.')}
+            onClick={onSignOut}
             className="w-full text-left px-4 py-3 rounded-lg text-sm font-medium text-red-500 hover:bg-red-50 transition"
           >
             Sign Out

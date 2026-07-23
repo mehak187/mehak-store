@@ -33,7 +33,9 @@ import ProductDetailPage from './components/ProductDetailPage';
 import TrackOrderPage from './components/TrackOrderPage';
 import HelpPage from './components/HelpPage';
 import AccountPage from './components/AccountPage';
-import { cartInitialItems } from './data/products';
+import AuthPage from './components/AuthPage';
+import WishlistPage from './components/WishlistPage';
+import { cartInitialItems, newArrivals } from './data/products';
 
 export default function App() {
   const [cartOpen, setCartOpen] = useState(false);
@@ -43,12 +45,14 @@ export default function App() {
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [activeArticle, setActiveArticle] = useState(null);
   const [cartItems, setCartItems] = useState(cartInitialItems);
-  const [wishlistCount, setWishlistCount] = useState(5);
+  const [wishlist, setWishlist] = useState(() => newArrivals.slice(0, 5));
   const [activeFilter, setActiveFilter] = useState('All');
   const [notification, setNotification] = useState({ show: false, message: '' });
   const [page, setPage] = useState('home');
   const [shopCategory, setShopCategory] = useState('All');
   const [detailProduct, setDetailProduct] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [userName, setUserName] = useState('');
 
   const navigate = (name) => {
     setPage(name);
@@ -65,6 +69,18 @@ export default function App() {
   const openArticle = (article) => {
     setActiveArticle(article);
     navigate('article');
+  };
+  const handleLogin = (name) => {
+    setLoggedIn(true);
+    setUserName(name || 'Mehak');
+    navigate('account');
+    showNotification(`Welcome, ${name || 'Mehak'}!`);
+  };
+  const handleSignOut = () => {
+    setLoggedIn(false);
+    setUserName('');
+    navigate('login');
+    showNotification('You have been signed out successfully.');
   };
 
   const showNotification = (message) => {
@@ -96,8 +112,18 @@ export default function App() {
   };
 
   const handleWishlist = (product, added) => {
-    setWishlistCount((c) => c + (added ? 1 : -1));
+    setWishlist((prev) => {
+      const exists = prev.some((p) => p.id === product.id);
+      if (added && !exists) return [...prev, product];
+      if (!added) return prev.filter((p) => p.id !== product.id);
+      return prev;
+    });
     showNotification(added ? `${product.name} added to wishlist!` : `${product.name} removed from wishlist`);
+  };
+
+  const removeFromWishlist = (id) => {
+    setWishlist((prev) => prev.filter((p) => p.id !== id));
+    showNotification('Removed from wishlist');
   };
 
   const handleQtyChange = (id, delta) => {
@@ -134,7 +160,8 @@ export default function App() {
       <AnnouncementBar />
       <Header
         cartCount={cartCount}
-        wishlistCount={wishlistCount}
+        wishlistCount={wishlist.length}
+        onWishlistOpen={() => navigate('wishlist')}
         onCartOpen={() => setCartOpen(true)}
         onSearchOpen={() => setSearchOpen(true)}
         onMenuOpen={() => setMobileMenuOpen(true)}
@@ -232,7 +259,29 @@ export default function App() {
 
       {page === 'help' && <main><HelpPage onNavigate={navigate} onNotify={showNotification} /></main>}
 
-      {page === 'account' && <main><AccountPage onNavigate={navigate} onNotify={showNotification} /></main>}
+      {page === 'account' && (
+        <main>
+          {loggedIn ? (
+            <AccountPage onNavigate={navigate} onNotify={showNotification} onSignOut={handleSignOut} userName={userName} />
+          ) : (
+            <AuthPage onLogin={handleLogin} onNotify={showNotification} />
+          )}
+        </main>
+      )}
+
+      {page === 'login' && <main><AuthPage onLogin={handleLogin} onNotify={showNotification} /></main>}
+
+      {page === 'wishlist' && (
+        <main>
+          <WishlistPage
+            items={wishlist}
+            onRemove={removeFromWishlist}
+            onAddToCart={handleAddToCart}
+            onOpenProduct={openProduct}
+            onShop={openShop}
+          />
+        </main>
+      )}
 
       {page === 'article' && <main><ArticlePage article={activeArticle} onBack={() => navigate('home')} onNotify={showNotification} /></main>}
 

@@ -1,7 +1,7 @@
 import { Icon } from './Icons';
 import { scrollToSection, scrollToTop } from '../utils/scroll';
 
-export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchOpen, onMenuOpen, onNotify, onNavigate, onShop, page }) {
+export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchOpen, onMenuOpen, onNotify, onNavigate, onShop, onWishlistOpen, page }) {
   const goShop = (category = 'All') => onShop(category);
   const active = (p) => (page === p ? 'text-brand-500' : '');
 
@@ -93,7 +93,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <button onClick={() => onNavigate('account')} className={`hidden md:block hover:text-brand-500 transition ${active('account')}`} aria-label="Account">
             <Icon name="user" />
           </button>
-          <button onClick={() => onNotify(`${wishlistCount} items in your wishlist!`)} className="relative hover:text-brand-500 transition" aria-label="Wishlist">
+          <button onClick={onWishlistOpen} className="relative hover:text-brand-500 transition" aria-label="Wishlist">
             <Icon name="heart" />
             {wishlistCount > 0 && (
               <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
