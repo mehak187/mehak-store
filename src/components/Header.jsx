@@ -96,7 +96,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <button onClick={onWishlistOpen} className="relative hover:text-brand-500 transition" aria-label="Wishlist">
             <Icon name="heart" />
             {wishlistCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+              <span key={wishlistCount} className="animate-badge-pop absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                 {wishlistCount}
               </span>
             )}
@@ -104,7 +104,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <button onClick={onCartOpen} className="relative hover:text-brand-500 transition" aria-label="Cart">
             <Icon name="cart" />
             {cartCount > 0 && (
-              <span className="absolute -top-2 -right-2 bg-brand-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
+              <span key={cartCount} className="animate-badge-pop absolute -top-2 -right-2 bg-brand-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">
                 {cartCount}
               </span>
             )}

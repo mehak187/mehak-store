@@ -204,6 +204,7 @@ export default function App() {
       />
       <Notification show={notification.show} message={notification.message} />
 
+      <div key={page} className="page-enter">
       {page === 'home' && (
         <main>
           <Hero onFilterChange={setActiveFilter} />
@@ -295,6 +296,7 @@ export default function App() {
           />
         </main>
       )}
+      </div>
 
       <Footer onShop={openShop} onNavigate={navigate} onNotify={showNotification} />
       <WhatsappButton />
