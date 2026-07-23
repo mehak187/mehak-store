@@ -22,7 +22,7 @@ export default function CollectionShowcase({ onFilterChange }) {
             desc="Timeless essentials for the modern wardrobe"
             cta="Shop Now →"
           />
-          <div className="grid grid-cols-1 gap-6 md:grid-rows-2 md:h-full">
+          <div className="grid grid-cols-1 gap-6">
             <WideCard
               onClick={() => shopFilter('Women')}
               image="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800"
@@ -60,7 +60,7 @@ const BigCard = ({ onClick, image, tag, title, desc, cta }) => (
 );
 
 const WideCard = ({ onClick, image, tag, title, desc }) => (
-  <button onClick={onClick} className="group relative aspect-[16/9] md:aspect-auto md:h-full overflow-hidden rounded-2xl block text-left w-full">
+  <button onClick={onClick} className="group relative aspect-[16/9] overflow-hidden rounded-2xl block text-left w-full">
     <img src={image} className="w-full h-full object-cover group-hover:scale-110 transition duration-700" alt={title} />
     <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent" />
     <div className="absolute inset-0 flex flex-col justify-center p-8 text-white">

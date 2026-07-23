@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Icon } from './Icons';
 import { newArrivals, bestSellers } from '../data/products';
 import { ProductSVGRenderer } from './ProductSVG';
@@ -18,6 +18,15 @@ export default function SearchOverlay({ open, onClose, onQuickView }) {
   }, [query]);
 
   const trending = allProducts.slice(0, 4);
+
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [open]);
 
   if (!open) return null;
 

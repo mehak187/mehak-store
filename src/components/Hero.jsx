@@ -109,18 +109,6 @@ export default function Hero({ onFilterChange }) {
         </div>
       </div>
 
-      <div className="absolute bottom-8 right-6 md:right-12 flex gap-2 z-10">
-        {slides.map((_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrent(i)}
-            aria-label={`Go to slide ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${
-              i === current ? 'w-7 bg-white' : 'w-2 bg-white/50 hover:bg-white/80'
-            }`}
-          />
-        ))}
-      </div>
 
       <button
         onClick={() => scrollToSection('categories')}

@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Icon } from './Icons';
 import { scrollToSection } from '../utils/scroll';
 
@@ -12,6 +13,15 @@ const links = [
 ];
 
 export default function MobileMenu({ open, onClose, onFilterChange, onNotify }) {
+  useEffect(() => {
+    if (open) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [open]);
+
   if (!open) return null;
 
   const handleClick = (link) => {

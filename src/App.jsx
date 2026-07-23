@@ -30,6 +30,9 @@ import ShopPage from './components/ShopPage';
 import AboutPage from './components/AboutPage';
 import ContactPage from './components/ContactPage';
 import ProductDetailPage from './components/ProductDetailPage';
+import TrackOrderPage from './components/TrackOrderPage';
+import HelpPage from './components/HelpPage';
+import AccountPage from './components/AccountPage';
 import { cartInitialItems } from './data/products';
 
 export default function App() {
@@ -223,6 +226,12 @@ export default function App() {
       {page === 'about' && <main><AboutPage /></main>}
 
       {page === 'contact' && <main><ContactPage onNotify={showNotification} /></main>}
+
+      {page === 'track' && <main><TrackOrderPage /></main>}
+
+      {page === 'help' && <main><HelpPage onNavigate={navigate} onNotify={showNotification} /></main>}
+
+      {page === 'account' && <main><AccountPage onNavigate={navigate} onNotify={showNotification} /></main>}
 
       {page === 'product' && (
         <main>

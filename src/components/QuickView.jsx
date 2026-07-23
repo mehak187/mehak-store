@@ -74,6 +74,16 @@ export default function QuickView({ product, onClose, onAddToCart }) {
     setSelectedColor(0);
   }, [product?.id]);
 
+  // Lock background scroll while open
+  useEffect(() => {
+    if (product) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [product]);
+
   if (!product) return null;
 
   // Get image based on selected color (if color has its own image) or fallback

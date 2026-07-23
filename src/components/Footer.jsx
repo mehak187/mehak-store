@@ -16,8 +16,8 @@ export default function Footer({ onShop, onNavigate, onNotify }) {
     { label: 'Shipping Info', action: () => onNotify('Free shipping on orders over $50 worldwide!') },
     { label: 'Returns & Exchanges', action: () => onNotify('30-day easy returns on all items.') },
     { label: 'Size Guide', action: () => onNotify('Size guide coming soon!') },
-    { label: 'FAQ', action: () => onNotify('FAQ page coming soon!') },
-    { label: 'Track Order', action: () => onNotify('Order tracking coming soon!') },
+    { label: 'FAQ', action: () => onNavigate('help') },
+    { label: 'Track Order', action: () => onNavigate('track') },
   ];
 
   const companyLinks = [

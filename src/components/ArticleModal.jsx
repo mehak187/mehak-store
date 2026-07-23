@@ -1,6 +1,16 @@
+import { useEffect } from 'react';
 import { Icon } from './Icons';
 
 export default function ArticleModal({ article, onClose }) {
+  useEffect(() => {
+    if (article) {
+      document.body.style.overflow = 'hidden';
+      return () => {
+        document.body.style.overflow = '';
+      };
+    }
+  }, [article]);
+
   if (!article) return null;
 
   return (

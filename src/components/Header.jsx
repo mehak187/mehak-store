@@ -46,8 +46,8 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
               ))}
             </div>
           </div>
-          <button onClick={() => onNotify('Order tracking feature coming soon!')} className="hover:text-brand-500 transition">Track Order</button>
-          <button onClick={() => onNotify('Support: hello@luxe.com')} className="hover:text-brand-500 transition">Help</button>
+          <button onClick={() => onNavigate('track')} className={`hover:text-brand-500 transition ${active('track')}`}>Track Order</button>
+          <button onClick={() => onNavigate('help')} className={`hover:text-brand-500 transition ${active('help')}`}>Help</button>
         </div>
       </div>
 
@@ -90,7 +90,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <button onClick={onSearchOpen} className="hover:text-brand-500 transition" aria-label="Search">
             <Icon name="search" />
           </button>
-          <button onClick={() => onNotify('My Account page coming soon!')} className="hidden md:block hover:text-brand-500 transition" aria-label="Account">
+          <button onClick={() => onNavigate('account')} className={`hidden md:block hover:text-brand-500 transition ${active('account')}`} aria-label="Account">
             <Icon name="user" />
           </button>
           <button onClick={() => onNotify(`${wishlistCount} items in your wishlist!`)} className="relative hover:text-brand-500 transition" aria-label="Wishlist">
