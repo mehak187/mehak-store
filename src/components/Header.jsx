@@ -6,7 +6,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
   const active = (p) => (page === p ? 'text-brand-500' : '');
 
   return (
-    <header className="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-ink-100">
+    <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-ink-100 shadow-[0_4px_20px_-8px_rgba(26,25,22,0.12)]">
       {/* Top Bar */}
       <div className="hidden lg:flex justify-between items-center px-8 py-2 text-xs text-ink-500 border-b border-ink-100">
         <div className="flex items-center gap-4">
@@ -101,7 +101,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
               </span>
             )}
           </button>
-          <button onClick={onCartOpen} className="relative hover:text-brand-500 transition" aria-label="Cart">
+          <button id="cart-icon" onClick={onCartOpen} className="relative hover:text-brand-500 transition" aria-label="Cart">
             <Icon name="cart" />
             {cartCount > 0 && (
               <span key={cartCount} className="animate-badge-pop absolute -top-2 -right-2 bg-brand-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">

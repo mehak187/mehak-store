@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Icon, StarRating } from './Icons';
 import { ProductSVGRenderer } from './ProductSVG';
+import { flyToCart } from '../utils/flyToCart';
 
 export default function ProductCard({ product, onAddToCart, onQuickView, onWishlist, onOpenProduct }) {
+  const mediaRef = useRef(null);
   const openDetail = () => (onOpenProduct ? onOpenProduct(product) : onQuickView(product));
   const [wishlisted, setWishlisted] = useState(false);
   const [selectedColorIdx, setSelectedColorIdx] = useState(0);
@@ -33,7 +35,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView, onWishl
       className="product-card group cursor-pointer"
       onClick={openDetail}
     >
-      <div className="product-media relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
+      <div ref={mediaRef} className="product-media relative aspect-[3/4] overflow-hidden bg-ink-100 rounded-lg mb-4">
         {product.svgType ? (
           <div className="w-full h-full product-img transition-transform duration-700">
             <ProductSVGRenderer
@@ -66,6 +68,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView, onWishl
           <button
             onClick={(e) => {
               e.stopPropagation();
+              flyToCart(mediaRef.current, product.image);
               onAddToCart({ ...product, selectedColor: selectedColor?.name, color: selectedColor?.hex });
             }}
             className="flex-1 bg-ink-900 text-white text-sm py-2.5 rounded-lg hover:bg-brand-500 transition"
