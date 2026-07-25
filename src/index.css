@@ -127,7 +127,7 @@
   .animate-letter {
     display: inline-block;
     opacity: 0;
-    animation: letterRise 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: letterRise 0.3s cubic-bezier(0.22, 1, 0.36, 1) forwards;
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -1,7 +1,7 @@
 import { useState, useRef } from 'react';
 import { Icon, StarRating } from './Icons';
 import { ProductSVGRenderer } from './ProductSVG';
-import { flyToCart } from '../utils/flyToCart';
+import { flyToCart, flyHeart } from '../utils/flyToCart';
 
 export default function ProductCard({ product, onAddToCart, onQuickView, onWishlist, onOpenProduct }) {
   const mediaRef = useRef(null);
@@ -21,6 +21,7 @@ export default function ProductCard({ product, onAddToCart, onQuickView, onWishl
 
   const handleWishlist = (e) => {
     e.stopPropagation();
+    if (!wishlisted) flyHeart(e.currentTarget);
     setWishlisted((w) => !w);
     onWishlist?.(product, !wishlisted);
   };

@@ -93,7 +93,7 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <button onClick={() => onNavigate('account')} className={`hidden md:block hover:text-brand-500 transition ${active('account')}`} aria-label="Account">
             <Icon name="user" />
           </button>
-          <button onClick={onWishlistOpen} className="relative hover:text-brand-500 transition" aria-label="Wishlist">
+          <button id="wishlist-icon" onClick={onWishlistOpen} className="relative hover:text-brand-500 transition" aria-label="Wishlist">
             <Icon name="heart" />
             {wishlistCount > 0 && (
               <span key={wishlistCount} className="animate-badge-pop absolute -top-2 -right-2 bg-red-500 text-white text-xs w-4 h-4 rounded-full flex items-center justify-center">

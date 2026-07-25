@@ -27,7 +27,6 @@ export default function ShopPage({ onAddToCart, onQuickView, onWishlist, onOpenP
       <div className="text-center mb-10">
         <p className="text-brand-500 text-sm tracking-widest mb-3">EXPLORE THE COLLECTION</p>
         <h1 className="text-4xl md:text-5xl font-serif font-bold">Shop All Products</h1>
-        <p className="text-ink-500 mt-3">{products.length} items</p>
       </div>
 
       <div className="flex flex-wrap items-center justify-between gap-4 mb-8">

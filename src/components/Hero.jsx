@@ -33,7 +33,7 @@ export default function Hero({ onFilterChange }) {
   useEffect(() => {
     const id = setInterval(() => {
       setCurrent((c) => (c + 1) % slides.length);
-    }, 3500);
+    }, 2200);
     return () => clearInterval(id);
   }, []);
 
@@ -56,7 +56,7 @@ export default function Hero({ onFilterChange }) {
             key={s.image}
             src={s.image}
             alt="Hero"
-            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ${
               i === current ? 'opacity-100 animate-kenburns' : 'opacity-0'
             }`}
           />
@@ -72,13 +72,13 @@ export default function Hero({ onFilterChange }) {
               {slide.eyebrow}
             </p>
             <h1 className="hero-title text-5xl md:text-6xl lg:text-8xl font-serif font-bold leading-tight mb-6">
-              <AnimatedWord word={slide.line1} startDelay={0.1} />
+              <AnimatedWord word={slide.line1} startDelay={0.05} />
               <br />
-              <AnimatedWord word={slide.line2} startDelay={0.45} />
+              <AnimatedWord word={slide.line2} startDelay={0.3} />
             </h1>
             <p
               className="text-lg md:text-xl mb-8 max-w-lg animate-slide-up"
-              style={{ animationDelay: '0.8s', animationFillMode: 'backwards' }}
+              style={{ animationDelay: '0.55s', animationFillMode: 'backwards' }}
             >
               {slide.subtitle}
             </p>
@@ -125,7 +125,7 @@ export default function Hero({ onFilterChange }) {
 const AnimatedWord = ({ word, startDelay = 0 }) => (
   <span className="inline-block">
     {word.split('').map((ch, i) => (
-      <span key={i} className="animate-letter" style={{ animationDelay: `${startDelay + i * 0.04}s` }}>
+      <span key={i} className="animate-letter" style={{ animationDelay: `${startDelay + i * 0.03}s` }}>
         {ch}
       </span>
     ))}

@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { burstConfetti } from '../utils/confetti';
 
 export default function Checkout({ open, onClose, items, onPaid }) {
   const [step, setStep] = useState('form'); // 'form' | 'processing' | 'success'
@@ -188,6 +189,10 @@ export default function Checkout({ open, onClose, items, onPaid }) {
 
 function SuccessView({ email, total, onDone }) {
   const orderNo = 'LX' + String(Math.floor(total * 100) + 10248);
+
+  useEffect(() => {
+    burstConfetti(window.innerWidth / 2, window.innerHeight / 3);
+  }, []);
   return (
     <div className="p-10 md:p-16 text-center">
       <div className="mx-auto w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-6 animate-pop">

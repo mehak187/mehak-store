@@ -34,3 +34,32 @@ export function flyToCart(sourceEl, imageSrc) {
 
   setTimeout(() => img.remove(), 850);
 }
+
+// A heart emoji that flies from the clicked button into the wishlist icon.
+export function flyHeart(sourceEl) {
+  const target = document.getElementById('wishlist-icon');
+  if (!target || !sourceEl) return;
+
+  const start = sourceEl.getBoundingClientRect();
+  const end = target.getBoundingClientRect();
+
+  const el = document.createElement('div');
+  el.textContent = '❤️';
+  el.style.position = 'fixed';
+  el.style.left = `${start.left + start.width / 2 - 12}px`;
+  el.style.top = `${start.top + start.height / 2 - 12}px`;
+  el.style.fontSize = '22px';
+  el.style.zIndex = '9999';
+  el.style.pointerEvents = 'none';
+  el.style.transition = 'all 0.8s cubic-bezier(0.5, -0.1, 0.3, 1)';
+  document.body.appendChild(el);
+
+  requestAnimationFrame(() => {
+    el.style.left = `${end.left + end.width / 2 - 11}px`;
+    el.style.top = `${end.top + end.height / 2 - 11}px`;
+    el.style.transform = 'scale(0.4)';
+    el.style.opacity = '0.3';
+  });
+
+  setTimeout(() => el.remove(), 850);
+}
