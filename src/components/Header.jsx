@@ -14,38 +14,6 @@ export default function Header({ cartCount, wishlistCount, onCartOpen, onSearchO
           <a href="mailto:hello@luxe.com" className="hover:text-brand-500 transition">✉ hello@luxe.com</a>
         </div>
         <div className="flex items-center gap-5">
-          <div className="relative group">
-            <button className="flex items-center gap-1 hover:text-brand-500 transition">
-              USD $
-              <Icon name="chevronDown" className="w-3 h-3" />
-            </button>
-            <div className="absolute right-0 top-full mt-1 bg-white border border-ink-100 shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition min-w-[100px] z-10">
-              {['USD $', 'EUR €', 'GBP £', 'AED د.إ', 'PKR ₨'].map((c) => (
-                <button key={c} className="block w-full text-left px-4 py-2 hover:bg-ink-50 hover:text-brand-500 text-xs">
-                  {c}
-                </button>
-              ))}
-            </div>
-          </div>
-          <div className="relative group">
-            <button className="flex items-center gap-1 hover:text-brand-500 transition">
-              🇺🇸 EN
-              <Icon name="chevronDown" className="w-3 h-3" />
-            </button>
-            <div className="absolute right-0 top-full mt-1 bg-white border border-ink-100 shadow-lg rounded-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition min-w-[130px] z-10">
-              {[
-                { flag: '🇺🇸', name: 'English' },
-                { flag: '🇸🇦', name: 'Arabic' },
-                { flag: '🇵🇰', name: 'Urdu' },
-                { flag: '🇪🇸', name: 'Español' },
-                { flag: '🇫🇷', name: 'Français' },
-              ].map((l) => (
-                <button key={l.name} className="block w-full text-left px-4 py-2 hover:bg-ink-50 hover:text-brand-500 text-xs">
-                  {l.flag} {l.name}
-                </button>
-              ))}
-            </div>
-          </div>
           <button onClick={() => onNavigate('track')} className={`hover:text-brand-500 transition ${active('track')}`}>Track Order</button>
           <button onClick={() => onNavigate('help')} className={`hover:text-brand-500 transition ${active('help')}`}>Help</button>
         </div>
